@@ -765,6 +765,10 @@ class Sale_lib
 		}
 		elseif($price_mode == PRICE_MODE_KIT)
 		{
+			if(($discount_type != PERCENT && $discount > $item_info->unit_price) || $item_info->unit_price == 0.00)
+			{
+				$discount = 0.00;
+			}
 			if($kit_price_option == PRICE_OPTION_ALL)
 			{
 				$price = $item_info->unit_price;
@@ -779,6 +783,12 @@ class Sale_lib
 			{
 				$price = $item_info->unit_price;
 				$cost_price = $item_info->cost_price;
+			}
+			else
+			{
+				$price = 0.00;
+				$cost_price = $item_info->cost_price;
+				$discount = 0.00;
 			}
 		}
 
